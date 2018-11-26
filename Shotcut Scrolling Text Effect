@@ -1,0 +1,70 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8">
+<script src="qrc:/scripts/jquery.js"></script>
+<script src="qrc:/scripts/rangy-core.js"></script>
+<script src="qrc:/scripts/rangy-cssclassapplier.js"></script>
+<script src="qrc:/scripts/htmleditor.js"></script>
+<!-- this is possible thanks to http://www.elusien.co.uk/shotcut/ -->
+<style>
+    html, body    {margin: 0; width: 100%; height: 100%; overflow: hidden; }
+    #credits      {position: absolute; top: 100%; width: 100%; padding: 25px 0; margin:0; text-align: center;}
+    	/****************************************/
+    	/* You may change any styles below here */
+    	/****************************************/
+    #credits * {font: 25px Open Sans Condensed, Liberation Sans, Arial, sans-serif; color: #fff;
+  	            text-shadow: -1px -1px 0 #444, 1px -1px 0 #444, -1px 1px 0 #444, 1px 1px 0 #444;
+	} /* Alter the color especially according to your background, as well as the font */
+    #credits h1	     {font-size: 3em;}                                             /* Alter the size especially according to your requirement */
+    #credits .legal	 {font-size: 0.9em; width: 50%; margin: auto; color: #ddd;}    /* Alter the color especially according to your background */
+	/********************************************************/
+             /* Change CSS below only if you know what you are doing */
+	/********************************************************/
+    #credits table, #credits tr {width: 100%; font-size: 1em;}
+    #credits td:first-child	{width: 45%; padding: 8px 0.5%; font-size: 1.0em; text-align: right;}
+    #credits td:last-child	{width: 45%; padding: 8px 0.5%; font-size: 2.0em; text-align: left;}
+</style>
+
+</head>
+<body>
+	<div id="credits" data-control="15:30"> <!-- Do not change the ID of this div, anything in it will appear on the scrolling credits -->
+		<h1>IF THIS DOESN'T MAKE YOU SUBSCRIBE I DON'T KNOW WHAT WILL</h1>
+        <h1>Cast</h1>
+        <table>			
+            <tr><td>Smart Cookie</td><td>Brokeback Cardiac</td></tr>
+            <tr><td>Bright Head</td><td>Brokemook Cambridge</td></tr>
+            <tr><td>Dark Squishie</td><td>Barlendey Kumberlatch</td></tr>
+        </table>
+        <h1>Credits</h1>
+        <table>			
+            <tr><td>Creative Lead</td><td>Tux</td></tr>
+            <tr><td>Coder</td><td>Linus</td></tr>
+            <tr><td>Writer</td><td>Bill</td></tr>
+        </table>
+        <h1>Locations</h1>
+        <p>Memphis, France</p>
+        <p>Ravenfield, Sweden</p>
+        <p>Fallingwater, Pennsylvania, USA</p>
+    </div>
+</body>
+<script src="./WebVfx.js"></script>
+<script>
+	
+	webvfx_add_to_frame = [scroll];	// Tells Elusien's WebVfx framework to run the "scroll" routine for each frame.
+	SC = {					// SC (Scrolling Cedits) has to be of GLOBAL scope
+		credits       : {},
+		style		  : {},
+		initial_top   : 0,   
+		total_height  : 0  
+	};
+	
+	function scroll(time, browser, frame_number, frame_rate) {		
+		if (time === 0.0) {
+			SC.credits       = document.getElementById('credits');
+			SC.style         = SC.credits.style;
+			SC.initial_top   = SC.credits.offsetTop;       
+			SC.total_height  = SC.credits.offsetHeight + SC.initial_top;
+		} else {
+			SC.style.top     = (SC.initial_top - SC.total_height * time) + "px"; // Scrolls up an increment
+		}
+	}
+</script>
+</html>
